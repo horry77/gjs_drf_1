@@ -24,7 +24,7 @@ while True:
     if not line:
         break
     line = line.replace('\n', '')
-    start = line.find('c')
+    start = line.find('=')
     key = line[:start]
     value = line[start+1 :]
     env_list[key] = value
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accountapp',
 ]
 
 MIDDLEWARE = [
