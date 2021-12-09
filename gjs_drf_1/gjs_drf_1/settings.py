@@ -9,19 +9,30 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+local_env = open(os.path.join(BASE_DIR,'.env'))
+env_list = dict()
+
+while True:
+    line = local_env.readline()
+    if not line:
+        break
+    line = line.replace('\n', '')
+    start = line.find('c')
+    key = line[:start]
+    value = line[start+1 :]
+    env_list[key] = value
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
+SECRET_KEY = env_list['SECRET_KEY']
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-g%j@wn$ynyv3k^ex=o&@6t6+%rjf9yos15pqtodofpab!__#$w'
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
