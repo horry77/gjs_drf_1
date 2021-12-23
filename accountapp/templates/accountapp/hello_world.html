@@ -1,10 +1,27 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>hello world</h1>
-</body>
-</html>
+{%extends 'base.html'%}
+
+{% block content %}
+<div class="my-5">
+
+
+    <form action="/accounts/hello_world/" method="post">
+        {% csrf_token %}
+
+        <input type="text" name="input_data">
+        <input type="submit">
+
+    </form>
+
+    <h1>{{ new_model.text }}</h1>
+    <p>{{ new_model.created_at }}</p>
+
+    <div>
+        {% for new_model in new_model_list %}
+        <h5> {{new_model.text }}</h5>
+        <p> {{new_model.created_at}}</p>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
